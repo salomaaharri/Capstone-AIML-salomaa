@@ -85,7 +85,7 @@ weighted avg       1.00      1.00      1.00     44062
 
 **Initial Performance**: The training started with an initial loss of 0.0266 and an accuracy of 99.44% on the training set. The validation loss was 0.0145 with a validation accuracy of 99.62% in the first epoch.
 
--**Improvement Over Epochs**: The model showed consistent improvement in the first couple of epochs, achieving its best validation loss of 0.0055 and a validation accuracy of 99.88% by the end of the second epoch. This marks the peak performance of the model during training.
+**Improvement Over Epochs**: The model showed consistent improvement in the first couple of epochs, achieving its best validation loss of 0.0055 and a validation accuracy of 99.88% by the end of the second epoch. This marks the peak performance of the model during training.
 
 **Subsequent Epochs**: In epochs 3 and 4, while the training loss and accuracy continued to improve slightly, the validation loss increased compared to its best at epoch 2, indicating the beginning of overfitting.
 
