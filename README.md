@@ -49,9 +49,52 @@ The model was trained using:
 - **Early Stopping**: To halt training when validation loss ceased to decrease, ensuring the model did not overfit the training data.
 - **SMOTE**: To address class imbalance by oversampling minority classes in the training data.
 
+```
+Training the model
+Epoch 1/100
+5508/5508 [==============================] - 12s 2ms/step - loss: 0.0266 - accuracy: 0.9944 - val_loss: 0.0145 - val_accuracy: 0.9962
+Epoch 2/100
+5508/5508 [==============================] - 11s 2ms/step - loss: 0.0139 - accuracy: 0.9970 - val_loss: 0.0055 - val_accuracy: 0.9988
+Epoch 3/100
+5508/5508 [==============================] - 11s 2ms/step - loss: 0.0129 - accuracy: 0.9971 - val_loss: 0.0097 - val_accuracy: 0.9967
+Epoch 4/100
+5508/5508 [==============================] - 11s 2ms/step - loss: 0.0117 - accuracy: 0.9974 - val_loss: 0.0165 - val_accuracy: 0.9951
+Epoch 5/100
+5503/5508 [============================>.] - ETA: 0s - loss: 0.0108 - accuracy: 0.9975Restoring model weights from the end of the best epoch: 2.
+5508/5508 [==============================] - 11s 2ms/step - loss: 0.0108 - accuracy: 0.9975 - val_loss: 0.0090 - val_accuracy: 0.9966
+Epoch 5: early stopping
+```
+
 ### Model Evaluation
 
 I evaluated the model on a held-out test dataset, measuring accuracy, precision, recall, and F1-score. The evaluation confirmed the model's effectiveness, demonstrating its potential to accurately predict pump failures.
+
+```
+Evaluating the model
+Accuracy: 0.9987517588852072
+              precision    recall  f1-score   support
+
+         0.0       1.00      1.00      1.00     41239
+         1.0       0.99      0.99      0.99      2823
+
+    accuracy                           1.00     44062
+   macro avg       0.99      1.00      0.99     44062
+weighted avg       1.00      1.00      1.00     44062
+```
+
+
+**Initial Performance**: The training started with an initial loss of 0.0266 and an accuracy of 99.44% on the training set. The validation loss was 0.0145 with a validation accuracy of 99.62% in the first epoch.
+
+-**Improvement Over Epochs**: The model showed consistent improvement in the first couple of epochs, achieving its best validation loss of 0.0055 and a validation accuracy of 99.88% by the end of the second epoch. This marks the peak performance of the model during training.
+
+**Subsequent Epochs**: In epochs 3 and 4, while the training loss and accuracy continued to improve slightly, the validation loss increased compared to its best at epoch 2, indicating the beginning of overfitting.
+
+**Early Stopping**: The training utilized early stopping, which halted the training at epoch 5 when the model's performance on the validation set did not improve. The model weights were restored to those of the best epoch, which is epoch 2 in this case, to prevent overfitting and ensure the model retains its best generalization ability.
+
+**Final Model Evaluation**: Upon evaluating the model on the test set, it achieved an impressive accuracy of 99.88%. The precision, recall, and F1-score for classifying the 'NORMAL' state (0.0) were all approximately 100%, and for the 'BROKEN' state (1.0), these metrics were around 99%, indicating a highly effective model in distinguishing between the two states.
+
+**Summary**: The training process was efficient, with the model quickly reaching a high level of accuracy. The use of early stopping effectively prevented overfitting, ensuring the model maintained its generalization capabilities. The final evaluation metrics demonstrate the model's excellent performance in accurately classifying the two states of the pumps, with nearly perfect accuracy, precision, recall, and F1-scores across both classes.
+
 
 ## Implementation and Visualization
 
@@ -82,7 +125,7 @@ I conducted predictions on subsets of the data, including sequences directly bef
 
 ## Conclusion
 
-Pump dashboard seems to visualize (predict) pump failure few minute before pumps real 'Broken' status. This is good and pump can be shut down to prevent total failure.
+Pump dashboard seems to visualize (predict) pump failure few minutes before pumps real 'Broken' status. This is good and pump can be shut down to prevent total failure.
 
 This project demonstrates the applicability and effectiveness of LSTM networks in predictive maintenance for industrial pumps. Through detailed data preparation, careful model training, and rigorous testing, I've developed a system capable of predicting failures with high accuracy. Future enhancements will focus on refining the model with additional data and exploring more sophisticated architectures to improve predictive performance further.
 
