@@ -1,0 +1,27 @@
+{
+  "name": "cncdashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "date-fns": "^2.30.0",
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-gauge-component": "^1.1.30",
+    "recharts": "^2.10.3",
+    "socket.io-client": "^4.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  }
+}

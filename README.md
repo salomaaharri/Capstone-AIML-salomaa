@@ -2,91 +2,85 @@
 
 ## Introduction
 
-### Overview of Industrial Pump Failures
-
-Industrial pumps play a crucial role in the infrastructure of various sectors, including manufacturing, oil and gas, water treatment, and many others. These pumps are essential for the continuous operation of many processes, making their reliability a top priority for industry professionals. The failure of these pumps can lead to significant operational disruptions, financial losses due to downtime, and potential safety risks. Therefore, the maintenance of industrial pumps is a critical task that requires efficient and effective management to prevent unexpected breakdowns.
-
-### Potential of Machine Learning
-
-Recent advancements in machine learning (ML) present a transformative approach to predictive maintenance. Unlike traditional methods, ML can analyze complex patterns within historical sensor data to accurately predict potential failures. This predictive capability allows for timely maintenance interventions, optimizing operational efficiency and extending the equipment's lifespan, thus mitigating the risk of unexpected failures.
-
-## Background and Motivation
-
-### Current Challenges
-
-Traditional maintenance strategies, including reactive and scheduled preventive maintenance, have shown limitations. Reactive maintenance often leads to prolonged downtime and higher repair costs, while preventive maintenance can result in unnecessary maintenance activities, wasting resources and time. These methods struggle to address complex failure patterns, leading to inefficiencies and increased operational costs.
-
-### Advancements in Machine Learning
-
-The evolution of machine learning, especially deep learning techniques, has revolutionized predictive maintenance strategies. These advancements enable the development of dynamic prediction models that learn from vast quantities of data, offering a more accurate and reliable means of predicting equipment failures before they occur.
+In my project, I address the critical challenge of industrial pump failures, which can lead to significant operational disruptions and financial losses across various sectors. By leveraging machine learning (ML), specifically Long Short-Term Memory (LSTM) networks, I aim to predict such failures before they occur, enabling timely maintenance actions that can prevent downtime and extend equipment lifespan.
 
 ## Methodology
 
 ### Data Acquisition and Preparation
 
-#### **Source of Data**
+#### **Data Cleanup**
 
-Our project utilizes a comprehensive dataset from Kaggle, which includes timestamps, machine statuses, and readings from 52 sensors on industrial pumps. This dataset provides a realistic foundation for developing predictive maintenance models.
+The project began with a comprehensive Kaggle dataset, which included detailed sensor readings, timestamps, and machine statuses. My initial steps involved:
 
-#### **Data Structure and Cleaning**
+- **Timestamp Conversion**: I transformed timestamp data into a datetime format to facilitate time-series analysis.
+- **Column Removal**: I removed irrelevant columns, such as 'Unnamed: 0' and 'sensor_15', which did not contribute to the analysis.
+- **Missing Value Handling**: I employed interpolation to fill missing values, ensuring a continuous dataset for training the model. Where interpolation was not applicable, I used backward filling as a secondary approach.
+- **Status Consolidation**: The 'BROKEN' and 'RECOVERING' statuses were merged into a single 'BROKEN' category to simplify the prediction model's output.
 
-The dataset was preprocessed to ensure quality and consistency. This involved converting timestamps to datetime formats, handling missing values through interpolation, and consolidating machine statuses to focus on critical failure points. These steps prepared the dataset for further analysis and model development.
+#### **Data Engineering**
 
-### Feature Analysis
+To enhance the dataset for ML modeling, I performed several engineering steps:
 
-#### **Identifying Key Sensors**
+- **Feature Generation**: I created temporal features using rolling statistics (mean, standard deviation, minimum, and maximum) over different time windows, along with lagged features to capture previous states of sensors.
+- **Rate of Change**: Calculating the rate of change for sensor readings added another layer of information, potentially indicative of emerging failures.
 
-Through statistical analysis and feature selection techniques, we identified a subset of sensors with significant correlations to machine failures. This focused approach allowed us to streamline the model training process and improve prediction accuracy.
+#### **Data Scaling**
 
-#### **Insights Gained**
-
-The feature analysis phase revealed specific sensors that serve as strong predictors of pump failure. These insights are crucial for refining our predictive model and understanding the failure mechanisms of industrial pumps.
+Normalization was crucial for the LSTM model's performance. I scaled the sensor data to a \[0, 1\] range using MinMaxScaler, ensuring that the LSTM inputs were appropriately normalized to facilitate efficient training and prediction accuracy.
 
 ### Model Development and Training
 
-#### **Choosing the Model**
+#### **LSTM Model Architecture**
 
-We selected a Sequential model architecture with Long Short-Term Memory (LSTM) layers, ideal for handling time-series sensor data. LSTM networks are capable of capturing long-term dependencies in data sequences, making them well-suited for predictive maintenance applications.
+I chose a Sequential model with LSTM layers due to their ability to remember information over long periods, which is vital for time-series data like sensor readings. The model included:
 
-#### **Training Process and Optimization**
+- **LSTM Layers**: To capture temporal dependencies in the data.
+- **Dense Output Layer**: With softmax activation for binary classification (NORMAL vs. BROKEN).
 
-The model underwent a rigorous training process, incorporating techniques like dropout and early stopping to mitigate overfitting, and SMOTE to address class imbalance. These strategies ensured a robust training process and optimized model performance.
+#### **Training Process**
+
+The model was trained using:
+
+- **Adam Optimizer**: With a specified learning rate and clipnorm to manage gradient explosion.
+- **Dropout**: For regularization to prevent overfitting.
+- **Early Stopping**: To halt training when validation loss ceased to decrease, ensuring the model did not overfit the training data.
+- **SMOTE**: To address class imbalance by oversampling minority classes in the training data.
 
 ### Model Evaluation
 
-#### **Performance Metrics**
-
-The trained model demonstrated high accuracy and other key performance metrics, indicating its effectiveness in predicting pump failures. These results validate the model's potential to significantly impact maintenance strategies.
-
-#### **Interpreting Results**
-
-Model predictions closely aligned with real-world failure events, showcasing the model's practical applicability. This alignment confirms the model's value in operational settings, where timely and accurate predictions can prevent costly downtimes.
+I evaluated the model on a held-out test dataset, measuring accuracy, precision, recall, and F1-score. The evaluation confirmed the model's effectiveness, demonstrating its potential to accurately predict pump failures.
 
 ## Implementation and Visualization
 
-### Integration with Pump Server
+### Pump Server Integration
 
-The deployment of the trained model on a pump server enables real-time analysis and prediction of machine statuses. This integration represents a critical step towards operationalizing our predictive maintenance solution.
+The trained model was deployed on a pump server, enabling real-time prediction capabilities. This server continuously receives sensor data, processes it through the model, and outputs predictions regarding the pump's status.
 
-### Visualization with Next.js
+### Data Flow to WebSocket Client
 
-We developed a dynamic client application using Next.js for real-time monitoring of sensor data. The application features an interactive dashboard that displays live sensor values, trend curves, and predictive alerts, enhancing the user experience and facilitating proactive maintenance decisions.
+A Next.js client application was developed to receive data and predictions via WebSockets. This setup ensures real-time monitoring, allowing users to visualize sensor trends, current pump status, and receive alerts for potential failures.
+
+## Model Testing Process
+
+### Preparing Data for Testing
+
+I prepared the data for testing by:
+
+- **Loading and Scaling**: Normalizing the sensor data using the previously fitted MinMaxScaler.
+- **Mapping Machine Status**: Converting categorical statuses into numerical values for processing.
+
+### Generating Sequences
+
+The creation of sequences was crucial for the LSTM model, as it requires a series of data points to make predictions. I generated sequences that represented the sensor data over time, leading up to each data point's current status.
+
+### Prediction and Evaluation
+
+I conducted predictions on subsets of the data, including sequences directly before failure events, to test the model's predictive capability in critical scenarios. The model's predictions were then evaluated against actual outcomes, providing a detailed understanding of its performance through metrics such as accuracy and a classification report.
 
 ## Conclusion
 
-### Integration and Impact
+This project demonstrates the applicability and effectiveness of LSTM networks in predictive maintenance for industrial pumps. Through detailed data preparation, careful model training, and rigorous testing, I've developed a system capable of predicting failures with high accuracy. Future enhancements will focus on refining the model with additional data and exploring more sophisticated architectures to improve predictive performance further.
 
-The integration of our predictive maintenance model with real-time monitoring tools marks a significant advancement in industrial maintenance practices. By accurately predicting pump failures, our solution minimizes downtime and extends the lifespan of critical equipment, offering a proactive approach to maintenance management.
+The integration of ML models with operational technology, as demonstrated in this project, signifies a significant advancement in maintenance strategies, offering a proactive approach to preventing equipment failures.
 
-### Future Enhancements
-
-Future work will explore refining the model with additional data sources, incorporating more complex neural network architectures, and enhancing the dashboard with more interactive features. These enhancements aim to further improve prediction accuracy and user engagement.
-
-### Impact on Industrial Maintenance
-
-Our project illustrates the potential of machine learning in transforming industrial maintenance. By enabling predictive maintenance capabilities, our work contributes to more reliable, efficient, and cost-effective operations in industries reliant on industrial pumps.
-
-## References
-
-- Kaggle dataset for pump sensor data.
-- Relevant literature
+This detailed report expands on each phase of the project, from data preparation through model training and evaluation,

@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.titleSection {
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.mainTitle {
+    font-size: 1.5vw;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 0.5em;
+    color: #ccc;
+}
+
+.subtitle {
+    font-size: 1.0vw;
+    color: #aaa;
+    margin-bottom: 0.25em;
+}
+
+.subSubtitle {
+    font-style: italic;
+    font-size: 0.7vw;
+    color: #777;
+    margin-bottom: 1em;
+}
+
+.author {
+    font-weight: bold;
+    font-size: 0.8vw;
+    color: #999;
+}
+
+.dataSource {
+    color: #444;
+    font-size: 0.8vw;
+    margin-top: 1em;
+}
+
+.dataSource a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.dataSource a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,36 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+pumpdashboard/node_modules
+pumpdashboard/.pnp
+pumpdashboard/.pnp.js
+pumpdashboard/.yarn/install-state.gz
+
+# testing
+pumpdashboard/coverage
+
+# next.js
+pumpdashboard/.next/
+pumpdashboard/out/
+
+# production
+pumpdashboard/build
+
+# misc
+pumpdashboard/.DS_Store
+pumpdashboard/*.pem
+
+# debug
+pumpdashboard/npm-debug.log*
+pumpdashboard/yarn-debug.log*
+pumpdashboard/yarn-error.log*
+
+# local env files
+pumpdashboard/.env*.local
+
+# vercel
+pumpdashboard/.vercel
+
+# typescript
+pumpdashboard/*.tsbuildinfo
+pumpdashboard/next-env.d.ts
