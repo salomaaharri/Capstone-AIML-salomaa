@@ -1,5 +1,7 @@
 # Capstone Project: Predictive Maintenance Modeling for Industrial Pumps Using Machine Learning
 
+[Pump NextJS Dashboard talking to Python Pumpserver via WebSocket!](https://youtu.be/Vm6gt0G4SXg)
+
 ## Introduction
 
 In my project, I address the critical challenge of industrial pump failures, which can lead to significant operational disruptions and financial losses across various sectors. By leveraging machine learning (ML), specifically Long Short-Term Memory (LSTM) networks, I aim to predict such failures before they occur, enabling timely maintenance actions that can prevent downtime and extend equipment lifespan.
