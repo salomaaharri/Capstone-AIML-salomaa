@@ -82,8 +82,11 @@ I conducted predictions on subsets of the data, including sequences directly bef
 
 ## Conclusion
 
+Pump dashboard seems to visualize (predict) pump failure few minute before pumps real 'Broken' status. This is good and pump can be shut down to prevent total failure.
+
 This project demonstrates the applicability and effectiveness of LSTM networks in predictive maintenance for industrial pumps. Through detailed data preparation, careful model training, and rigorous testing, I've developed a system capable of predicting failures with high accuracy. Future enhancements will focus on refining the model with additional data and exploring more sophisticated architectures to improve predictive performance further.
 
 The integration of ML models with operational technology, as demonstrated in this project, signifies a significant advancement in maintenance strategies, offering a proactive approach to preventing equipment failures.
 
-This detailed report expands on each phase of the project, from data preparation through model training and evaluation,
+This detailed report is WIP can be updated as long model is being improved and tested
+
