@@ -4,7 +4,7 @@
 
 ## Introduction
 
-In my project, I address the critical challenge of industrial pump failures, which can lead to significant operational disruptions and financial losses across various sectors. By leveraging machine learning (ML), specifically Long Short-Term Memory (LSTM) networks, I aim to predict such failures before they occur, enabling timely maintenance actions that can prevent downtime and extend equipment lifespan.
+In my project, I address the critical challenge of industrial pump failures, which can lead to significant operational disruptions and financial losses across various sectors. By leveraging machine learning, specifically Long Short-Term Memory (LSTM) networks, I aim to predict such failures before they occur, enabling timely maintenance actions that can prevent downtime and extend equipment lifespan.
 
 ## Methodology
 
@@ -18,6 +18,7 @@ The project began with a comprehensive Kaggle dataset, which included detailed s
 - **Column Removal**: I removed irrelevant columns, such as 'Unnamed: 0' and 'sensor_15', which did not contribute to the analysis.
 - **Missing Value Handling**: I employed interpolation to fill missing values, ensuring a continuous dataset for training the model. Where interpolation was not applicable, I used backward filling as a secondary approach.
 - **Status Consolidation**: The 'BROKEN' and 'RECOVERING' statuses were merged into a single 'BROKEN' category to simplify the prediction model's output.
+- **Git large file support**: I needed to install git large file support for all data files: 1: brew install git-lfs. 2: git lfs install 3: git lfs track "*.csv"
 
 #### **Data Engineering**
 
