@@ -1,3 +1,9 @@
+from urllib3.exceptions import InsecureRequestWarning
+import warnings
+
+# Suppress only the single InsecureRequestWarning from urllib3 needed
+warnings.filterwarnings('ignore', category=InsecureRequestWarning)
+
 import asyncio
 import websockets
 import pandas as pd

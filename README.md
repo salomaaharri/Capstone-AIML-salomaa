@@ -2,9 +2,24 @@
 
 [Pump NextJS Dashboard talking to Python Pumpserver via WebSocket!](https://youtu.be/Vm6gt0G4SXg)
 
-## Introduction
+## Abstract
 
-In my project, I address the critical challenge of industrial pump failures, which can lead to significant operational disruptions and financial losses across various sectors. By leveraging machine learning, specifically Long Short-Term Memory (LSTM) networks, I aim to predict such failures before they occur, enabling timely maintenance actions that can prevent downtime and extend equipment lifespan.
+Industrial pump failures pose significant challenges, disrupting operations and causing financial losses. This project addresses these issues by developing a predictive maintenance model using Long Short-Term Memory (LSTM) networks. Utilizing a detailed dataset from Kaggle, which includes sensor readings, timestamps, and machine statuses, I undertook comprehensive data preparation and feature engineering. This preparation involved timestamp normalization, missing value interpolation, and the generation of temporal features, enhancing the dataset’s utility for predictive modeling.
+
+The choice of LSTM networks for this project stems from their effectiveness in processing time-series data and capturing long-term dependencies. Through a meticulous process of training, optimizing, and validating the model, I achieved a highly accurate system capable of preemptively identifying pump failures. This ability facilitates timely maintenance interventions, averting downtime and extending the lifespan of equipment.
+
+Moreover, the project includes the integration of the trained model into a pump server for real-time prediction, alongside the development of a Next.js dashboard. This dashboard visually represents sensor data trends, current pump status, and alerts for potential failures in real-time, promoting proactive maintenance actions.
+
+Initial findings showcase the model's high accuracy, precision, recall, and F1-score, effectively distinguishing between normal and broken pump states. These results mark a significant advancement in maintenance strategies, providing a scalable solution for industrial pump failure prediction.
+
+Future work will aim to refine the model with additional data, explore advanced machine learning architectures, and extend predictive capabilities to other critical pieces of industrial machinery. This project highlights the transformative impact of machine learning on improving industrial efficiency and reliability.
+
+
+## Notebooks
+
+- [salomaa-capstone-data prep and model training.ipynb](./salomaa-capstone-data%20prep%20and%20model%20training.ipynb): This notebook contains the steps taken to prepare the data, including cleaning, scaling, and feature engineering, followed by model training and evaluation.
+
+- [salomaa-capstone-data analysis.ipynb](./salomaa-capstone-data%20analysis.ipynb): This notebook is dedicated to analysis of the data, including anomaly detection and data visualization techniques.
 
 ## Methodology
 

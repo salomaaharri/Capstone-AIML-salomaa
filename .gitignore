@@ -9,6 +9,9 @@ pumpdashboard/.yarn/install-state.gz
 # testing
 pumpdashboard/coverage
 
+# logfiles
+logs/
+
 # next.js
 pumpdashboard/.next/
 pumpdashboard/out/
