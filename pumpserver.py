@@ -16,15 +16,20 @@ import featurex
 
 # https://www.kaggle.com/datasets/nphantawee/pump-sensor-data
 
+# Load sensor data and danger zones from CSV files. 
+# The sensor data has been pre-processed and features engineered for prediction.
 sensordata = pd.read_csv('data/sensor_engineered.csv')
 danger_zones_df = pd.read_csv('data/danger_zones.csv')
 danger_zones = danger_zones_df.to_dict(orient='records')
+
+# Filter sensor data to include only specified columns and map machine status to numerical values.
 sensordata = sensordata[featurex.columns]
 status_mapping = {'NORMAL': 0, 'BROKEN': 1}
 sensordata['machine_status'] = sensordata['machine_status'].map(status_mapping)
 
 print(sensordata['machine_status'].unique())
 
+# Initialize the current index for processing sensor data sequentially.
 current_index = 0
 
 # Find the index of the first occurrence where machine_status is 'BROKEN' (1)
@@ -34,6 +39,7 @@ broken_index = sensordata[sensordata['machine_status'] == 1].index[0] - 10  # st
 # Ensure the index is not negative
 current_index = max(broken_index, 0)
 
+# Set to track connected WebSocket clients.
 connected = set()
 
 # Load the model (adjust the path to where your model is saved)
@@ -90,6 +96,7 @@ seq_length = 10  # This should match the sequence length used during training
 buffer = np.zeros((seq_length, n_features))  # Adjust the number of sensors accordingly
 
 async def sensor_data_job(websocket, path):
+    """Coroutine to handle WebSocket connections and send sensor data and predictions."""
     global current_index, sensordata, buffer  # Add 'buffer' to the global declaration
 
     # Pre-fill the buffer with the first 'seq_length' data points
@@ -154,9 +161,17 @@ async def sensor_data_job(websocket, path):
 
 
 async def main():
+    # This function sets up the WebSocket server and awaits connections.
     print('waiting for socket client...')
+    # The websockets.serve function creates a WebSocket server at the specified address and port.
+    # The 'sensor_data_job' coroutine is passed as the handler for incoming WebSocket connections.
     async with websockets.serve(sensor_data_job, "localhost", 8765):
+        # The server runs indefinitely, waiting for and handling WebSocket connections.
+        # await asyncio.Future() keeps the server running forever by creating a never-ending task.
         await asyncio.Future()  # run forever
 
+# The __name__ == "__main__" check is Python's way of running code only when the script is executed directly, not when imported as a module.
 if __name__ == "__main__":
+    # asyncio.run(main()) starts the asynchronous event loop and runs the 'main' coroutine.
+    # It's the entry point to start the WebSocket server.
     asyncio.run(main())

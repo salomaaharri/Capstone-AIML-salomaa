@@ -27,7 +27,7 @@ Future work will aim to refine the model with additional data, explore advanced 
 
 #### **Data Cleanup**
 
-The project began with a comprehensive Kaggle dataset, which included detailed sensor readings, timestamps, and machine statuses. My initial steps involved (datacleanup.py):
+The project began with a comprehensive Kaggle dataset, which included detailed sensor readings, timestamps, and machine statuses. My initial steps involved:
 
 - **Timestamp Conversion**: I transformed timestamp data into a datetime format to facilitate time-series analysis.
 - **Column Removal**: I removed irrelevant columns, such as 'Unnamed: 0' and 'sensor_15', which did not contribute to the analysis.
@@ -37,22 +37,22 @@ The project began with a comprehensive Kaggle dataset, which included detailed s
 
 #### **Data Engineering**
 
-To enhance the dataset for ML modeling, I performed several engineering steps (dataengineered.py)):
+To enhance the dataset for ML modeling, I performed several engineering steps:
 
 - **Feature Generation**: I created temporal features using rolling statistics (mean, standard deviation, minimum, and maximum) over different time windows, along with lagged features to capture previous states of sensors.
 - **Rate of Change**: Calculating the rate of change for sensor readings added another layer of information, potentially indicative of emerging failures.
 
 #### **Data Scaling**
 
-Normalization was crucial for the LSTM model's performance. I scaled the sensor data to a \[0, 1\] range using MinMaxScaler, ensuring that the LSTM inputs were appropriately normalized to facilitate efficient training and prediction accuracy. (scalersave.py)
+Normalization was crucial for the LSTM model's performance. I scaled the sensor data to a \[0, 1\] range using MinMaxScaler, ensuring that the LSTM inputs were appropriately normalized to facilitate efficient training and prediction accuracy.
 
 #### **Anomalies Detection**
 
-I also applied few techniques to detect are anomalies in the dataset using isolation_forest.py approach
+I also applied few techniques to detect are anomalies in the dataset using isolation_forest approach
 
 #### **Heatmap and correlation**
 
-I also applied few techniques to visualize data correlation heatmap and feature correlation vs machine_status (correlection.py and heatmap.py)
+I also applied few techniques to visualize data correlation heatmap and feature correlation vs machine_status (correlection and heatmap)
 
 ### Model Development and Training
 
@@ -127,7 +127,7 @@ I used the trained model and deployed it on a pump server (pumpserver.py) , enab
 
 ### Data Flow to WebSocket Client
 
-I developed A Next.js client application (see pumpdashboard folder) to receive data and predictions via WebSockets. This setup ensures real-time monitoring, allowing users to visualize sensor trends, current pump status, and receive alerts for potential failures.
+I developed A Next.js client application (see pumpdashboard folder) to receive data and predictions via WebSockets. This setup ensures real-time monitoring, allowing users to visualize sensor trends, current pump status, and receive alerts for potential failures. To run this webapp, you need node installed and run it using npm run dev and then open the http://localhost:3000 with browser while pumpserver running using command python pumpserver.py
 
 ## Model Testing Process
 
@@ -144,7 +144,7 @@ The creation of sequences was crucial for the LSTM model, as it requires a serie
 
 ### Prediction and Evaluation
 
-I conducted predictions on subsets of the data (part of the training.py), including sequences directly before failure events, to test the model's predictive capability in critical scenarios. The model's predictions were then evaluated against actual outcomes, providing a detailed understanding of its performance through metrics such as accuracy and a classification report.
+I conducted predictions on subsets of the data, including sequences directly before failure events, to test the model's predictive capability in critical scenarios. The model's predictions were then evaluated against actual outcomes, providing a detailed understanding of its performance through metrics such as accuracy and a classification report.
 
 ## Conclusion
 
