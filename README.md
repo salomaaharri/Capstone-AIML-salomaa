@@ -17,9 +17,9 @@ Future work will aim to refine the model with additional data, explore advanced 
 
 ## Notebooks
 
-- [salomaa-capstone-data prep and model training.ipynb](./salomaa-capstone-data%20prep%20and%20model%20training.ipynb): This notebook contains the steps taken to prepare the data, including cleaning, scaling, and feature engineering, followed by model training and evaluation.
+- [1. salomaa-capstone-data prep and model training.ipynb](./1. salomaa-capstone-data%20prep%20and%20model%20training.ipynb): This notebook contains the steps taken to prepare the data, including cleaning, scaling, and feature engineering, followed by model training and evaluation.
 
-- [salomaa-capstone-data analysis.ipynb](./salomaa-capstone-data%20analysis.ipynb): This notebook is dedicated to analysis of the data, including anomaly detection and data visualization techniques.
+- [2. salomaa-capstone-data analysis.ipynb](./2. salomaa-capstone-data%20analysis.ipynb): This notebook is dedicated to analysis of the data, including anomaly detection and data visualization techniques.
 
 ## Methodology
 
